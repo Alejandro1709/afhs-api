@@ -1,13 +1,17 @@
+type STATUS = 'VIVO' | 'MUERTO' | 'LUCHITO' | 'DESCONOCIDO' | 'DESAPARECIDO';
+
+type GENDER = 'HOMBRE' | 'MUJER';
 export default interface ICharacter {
-  id?: string;
+  id?: string | number;
   name: string;
-  actor: string;
+  slug?: string;
+  actor: string | string[];
   image?: string;
   birthdate?: string[];
   work?: string[];
   otherWork?: string[];
-  status: 'VIVO' | 'MUERTO' | 'LUCHITO' | 'DESCONOCIDO';
-  gender: 'HOMBRE' | 'MUJER';
+  status: STATUS;
+  gender: GENDER;
   height?: number;
   nicknames?: string[];
   catchphrases?: string[];
