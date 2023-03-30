@@ -1,9 +1,14 @@
 import express from 'express';
 import morgan from 'morgan';
 import characterRoutes from './routers/character.routes';
-import { PORT, NODE_ENV } from './config/secrets';
+import secrets from './config/secrets';
+import { connectDb } from './config/db';
+
+const { NODE_ENV, PORT, MONGO } = secrets;
 
 const app = express();
+
+connectDb(MONGO as string);
 
 app.use(express.json());
 
