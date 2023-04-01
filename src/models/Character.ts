@@ -4,12 +4,12 @@ import type ICharacter from '../types/character';
 
 const characterSchema = new Schema<ICharacter>(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: [true, 'El personaje debe de tener un nombre!'] },
     slug: { type: String },
     actor: [
       {
         type: String,
-        required: true,
+        required: [true, 'El personaje debe de tener un como minímo actor!'],
       },
     ],
     image: { type: String },
@@ -31,13 +31,13 @@ const characterSchema = new Schema<ICharacter>(
     status: {
       type: String,
       enum: ['VIVO', 'MUERTO', 'LUCHITO', 'DESCONOCIDO', 'DESAPARECIDO'],
-      required: true,
+      required: [true, 'El personaje debe de tener un estado!'],
       default: 'DESCONOCIDO',
     },
     gender: {
       type: String,
       enum: ['HOMBRE', 'MUJER'],
-      required: true,
+      required: [true, 'El personaje debe de tener un género!'],
     },
     height: { type: Number },
     nicknames: [
