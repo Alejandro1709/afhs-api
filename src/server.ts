@@ -19,7 +19,7 @@ if (NODE_ENV === 'development') {
 app.use('/api/v1/characters', characterRoutes);
 
 app.get('/', (_req, res) => {
-  res.status(404).send('Not found');
+  res.status(401).send('Not Authorized');
 });
 
 app.listen(PORT, () => {
