@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import cors from 'cors';
 import characterRoutes from './routers/character.routes';
 import secrets from './config/secrets';
 import { connectDb } from './config/db';
@@ -11,6 +12,7 @@ const app = express();
 connectDb(MONGO as string);
 
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:5173'}));
 
 if (NODE_ENV === 'development') {
   app.use(morgan('dev'));
