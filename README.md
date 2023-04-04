@@ -46,8 +46,6 @@ See `contributing.md` for ways to get started.
 
 Please adhere to this project's `code of conduct`.
 
-
-
 ## Autores
 
 - [@Alejandro1709](https://github.com/Alejandro1709)
