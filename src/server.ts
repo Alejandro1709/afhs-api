@@ -1,6 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import mongoSanitize from 'express-mongo-sanitize';
+// import xss from 'xss-clean';
+import hpp from 'hpp';
 import characterRoutes from './routers/character.routes';
 import secrets from './config/secrets';
 import { connectDb } from './config/db';
@@ -11,8 +16,20 @@ const app = express();
 
 connectDb(MONGO as string);
 
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000, // 1 hour
+  message: 'Too many requests from this IP, please try again in an hour',
+});
+
+app.use('/api', limiter);
+
 app.use(express.json());
 app.use(cors({ origin: CLIENT_URL }));
+app.use(helmet());
+app.use(mongoSanitize());
+//app.use(xss());
+app.use(hpp());
 
 if (NODE_ENV === 'development') {
   app.use(morgan('dev'));
