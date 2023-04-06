@@ -1,5 +1,6 @@
 import User from "../models/User";
 import type { Request, Response } from "express";
+import generateToken from "../utils/generateToken";
 
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -15,7 +16,7 @@ export const loginUser = async (req: Request, res: Response) => {
       name: user.name,
       email: user.email,
       role: user.role,
-      token: null,
+      token: generateToken(user.id),
     });
   } catch (error) {
     console.error(error);
@@ -44,7 +45,7 @@ export const registerUser = async (req: Request, res: Response) => {
       name: user.name,
       email: user.email,
       role: user.role,
-      token: null,
+      token: generateToken(user.id),
     });
   } catch (error) {
     console.error(error);
