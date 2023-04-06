@@ -2,7 +2,18 @@ import dotenv from 'dotenv';
 
 dotenv.config({ path: '.env' });
 
-const { NODE_ENV, PORT, MONGO_URI_PROD, MONGO_URI_DEV, CLIENT_URL, JWT_SECRET, JWT_EXPIRES_IN } = process.env;
+const {
+  NODE_ENV,
+  PORT,
+  MONGO_URI_PROD,
+  MONGO_URI_DEV,
+  CLIENT_URL,
+  JWT_SECRET,
+  JWT_EXPIRES_IN,
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
+} = process.env;
 
 const MONGO = NODE_ENV === 'production' ? MONGO_URI_PROD : MONGO_URI_DEV;
 
@@ -13,4 +24,7 @@ export default {
   CLIENT_URL,
   JWT_SECRET,
   JWT_EXPIRES_IN,
+  CLOUDINARY_CLOUD_NAME,
+  CLOUDINARY_API_KEY,
+  CLOUDINARY_API_SECRET,
 };
