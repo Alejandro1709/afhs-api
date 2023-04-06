@@ -1,6 +1,8 @@
 import Character from '../models/Character';
+import cloudinary from '../utils/cloudinary';
 import type { Request, Response } from 'express';
 import type ICharacter from '../types/character';
+import { v2 } from 'cloudinary';
 
 export const getCharacters = async (_req: Request, res: Response) => {
   try {
@@ -31,7 +33,15 @@ export const getCharacter = async (req: Request, res: Response) => {
 
 export const createCharacter = async (req: Request, res: Response) => {
   try {
-    const savedCharacter = await Character.create(req.body);
+
+    const result = await cloudinary.uploader.upload(req.body.image, {
+      folder: 'afhs'
+    })
+
+    const savedCharacter = await Character.create({
+      ...req.body,
+      image: result.secure_url,
+    });
 
     res.status(201).json(savedCharacter);
   } catch (error) {
