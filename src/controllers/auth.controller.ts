@@ -41,12 +41,16 @@ export const registerUser = async (req: Request, res: Response) => {
       password,
     });
 
-    res.status(201).json({
-      name: user.name,
-      email: user.email,
-      role: user.role,
-      token: generateToken(user.id),
-    });
+    if (user) {
+      res.status(201).json({
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        token: generateToken(user.id),
+      });
+    } else {
+      res.status(400).json({ message: "Invalid User Data" });
+    }
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: error });

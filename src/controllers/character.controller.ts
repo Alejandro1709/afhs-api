@@ -2,7 +2,6 @@ import Character from '../models/Character';
 import cloudinary from '../utils/cloudinary';
 import type { Request, Response } from 'express';
 import type ICharacter from '../types/character';
-import { v2 } from 'cloudinary';
 
 export const getCharacters = async (_req: Request, res: Response) => {
   try {
