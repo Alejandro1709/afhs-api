@@ -26,7 +26,7 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 app.use(express.json());
-app.use(cors({ origin: CLIENT_URL }));
+app.use(cors({ origin: '*' }));
 app.use(helmet());
 app.use(mongoSanitize());
 //app.use(xss());
