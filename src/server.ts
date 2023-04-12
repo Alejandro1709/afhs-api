@@ -4,14 +4,14 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import mongoSanitize from 'express-mongo-sanitize';
-// import xss from 'xss-clean';
 import hpp from 'hpp';
 import characterRoutes from './routers/character.routes';
 import authRoutes from './routers/auth.routes';
 import secrets from './config/secrets';
 import { connectDb } from './config/db';
+import { errorHandler, notFound } from './middlewares/errorMiddleware';
 
-const { NODE_ENV, PORT, MONGO, CLIENT_URL } = secrets;
+const { NODE_ENV, PORT, MONGO } = secrets;
 
 const app = express();
 
@@ -42,6 +42,10 @@ app.use('/api/v1/auth', authRoutes);
 app.get('/', (_req, res) => {
   res.status(401).send('Not Authorized');
 });
+
+// Error handling
+app.use(notFound);
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} in ${NODE_ENV} mode`);
