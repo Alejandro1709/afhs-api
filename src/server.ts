@@ -7,6 +7,7 @@ import mongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
 import characterRoutes from './routers/character.routes';
 import authRoutes from './routers/auth.routes';
+import userRoutes from './routers/user.routes';
 import secrets from './config/secrets';
 import { connectDb } from './config/db';
 import { errorHandler, notFound } from './middlewares/errorMiddleware';
@@ -38,6 +39,7 @@ if (NODE_ENV === 'development') {
 
 app.use('/api/v1/characters', characterRoutes);
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', userRoutes);
 
 app.get('/', (_req, res) => {
   res.status(401).send('Not Authorized');
